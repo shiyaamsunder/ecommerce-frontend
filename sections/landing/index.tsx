@@ -1,3 +1,4 @@
+import { Link } from 'react-scroll';
 import { Button, ButtonGroup } from '../../components';
 import { LandingLeft, LandingRight, LandingWrapper } from './styles';
 
@@ -13,8 +14,12 @@ export const Landing = () => {
           auctor
         </p>
         <ButtonGroup spacing="40px">
-          <Button variant="solid">Shop Now</Button>
-          <Button variant="outline">Subscribe</Button>
+          <Link to="#products" href="#products" offset={-50}>
+            <Button variant="solid">Shop Now</Button>
+          </Link>
+          <Link to="#subscribe" href="#subscribe" offset={-50}>
+            <Button variant="outline">Subscribe</Button>
+          </Link>
         </ButtonGroup>
       </LandingLeft>
 

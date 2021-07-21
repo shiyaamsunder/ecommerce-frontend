@@ -4,9 +4,12 @@ export const LandingWrapper = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 90vh;
+  height: 100%;
+  padding: 40px 0 60px 0;
 
-  @media only screen and (max-width: 1000px) {
+  border-bottom: 2px solid #808080a6;
+
+  @media only screen and (max-width: 960px) {
     flex-direction: column;
     flex-direction: column-reverse;
     justify-content: space-evenly;
@@ -27,7 +30,7 @@ export const LandingLeft = styled.div`
     line-height: 1.5;
   }
 
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 960px) {
     width: 100%;
 
     & .landing__heading {
@@ -52,7 +55,7 @@ export const LandingRight = styled.div`
     object-fit: contain;
   }
 
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 960px) {
     & > img {
       height: 300px;
     }
