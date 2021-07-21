@@ -30,7 +30,7 @@ export const StyledButton = styled.button<ButtonProps>`
 `;
 
 export const StyledButtonGroup = styled.div<ButtonGroupProps>`
-  & > button:not(:first-of-type) {
+  & > :not(:first-child) {
     margin-left: ${({ spacing }) => spacing ?? '10px'};
   }
 `;

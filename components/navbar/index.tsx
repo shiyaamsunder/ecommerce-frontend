@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import { UserIcon, CartIcon } from '../icons';
 
@@ -6,14 +7,20 @@ const StyledNav = styled.nav`
   align-items: center;
   justify-content: space-between;
 
+  background-color: white;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
   width: 100%;
 
   padding: 15px 80px;
   height: 70px;
 
-  margin-bottom: 20px;
+  z-index: 20;
 
-  & > .nav-logo {
+  & .nav-logo {
     font-size: ${({ theme }) => theme.text.headingThree};
     margin: 0;
   }
@@ -34,7 +41,11 @@ const StyledNav = styled.nav`
 export const NavBar = () => {
   return (
     <StyledNav>
-      <h3 className="nav-logo">Morioh</h3>
+      <Link href="/">
+        <a>
+          <h3 className="nav-logo">Morioh</h3>
+        </a>
+      </Link>
 
       <div className="nav-right">
         <UserIcon />
