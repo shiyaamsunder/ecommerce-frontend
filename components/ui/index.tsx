@@ -7,7 +7,10 @@ import {
 } from 'styled-system';
 import { CardWrapper, GridWrapper, StyledBox, StyledFlex } from './styles';
 
-export const Card: React.FunctionComponent = ({ children, ...rest }) => {
+export const Card: React.FunctionComponent<LayoutProps & FlexboxProps> = ({
+  children,
+  ...rest
+}) => {
   return <CardWrapper {...rest}>{children}</CardWrapper>;
 };
 

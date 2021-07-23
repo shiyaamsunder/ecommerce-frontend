@@ -11,12 +11,14 @@ import {
   LayoutProps,
   position,
   PositionProps,
+  TextStyleProps,
   width,
   WidthProps
 } from 'styled-system';
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
   ${flex}
+  ${layout}
   padding: 20px 30px;
   width: 100%;
   height: auto;
@@ -29,6 +31,15 @@ export const CardWrapper = styled.div`
 
   & h1 {
     text-transform: capitalize;
+  }
+
+  & .title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+
+    text-align: center;
   }
 
   &:hover {
