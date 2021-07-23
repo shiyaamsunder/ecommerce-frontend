@@ -1,7 +1,6 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import Image from "next/image";
-import { Box, Button, CartIcon, GoBackLink } from "../../../../components";
-import { Product } from "../../../../types";
+import Image from 'next/image';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { Box, Button, CartIcon, GoBackLink } from '@components';
 import {
   Middle,
   Details,
@@ -10,7 +9,8 @@ import {
   Wrapper,
   Top,
   Bottom,
-} from "../../../../styles/product.styles";
+} from '@styles/product.styles';
+import { Product } from '@types';
 
 function SingleProduct({ product }: { product: Product }) {
   return (
@@ -18,7 +18,7 @@ function SingleProduct({ product }: { product: Product }) {
       <Left>
         <Box
           width="400px"
-          height={["250px", "300px", "500px"]}
+          height={['250px', '300px', '500px']}
           position="relative"
         >
           <Image

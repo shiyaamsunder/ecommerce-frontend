@@ -1,13 +1,13 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { Grid, GoBackLink, NavBar } from "../../../components";
-import { ProductCard } from "../../../containers/product-card";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { Grid, GoBackLink, NavBar } from '@components';
+import { ProductCard } from '@containers';
 import {
   CategoriesTop,
   CategoriesBottom,
   CategoriesWrapper,
-} from "../../../styles/categories.styles";
-import { Category, Product } from "../../../types";
+} from '@styles/categories.styles';
+import { Category, Product } from '@types';
 
 function ProductsByCategories({ products }: { products: Product[] }) {
   const router = useRouter();

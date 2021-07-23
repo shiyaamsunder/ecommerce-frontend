@@ -1,7 +1,7 @@
-import { Grid } from "../../components";
-import { CategoryCard } from "../../containers/category-card";
-import { Category } from "../../types";
-import { ProductWrapper } from "./styles";
+import { Grid } from '@components';
+import { CategoryCard } from '@containers';
+import { Category } from '@types';
+import { ProductWrapper } from './styles';
 
 export const ProductSection = ({ products }: { products: Category[] }) => {
   return (

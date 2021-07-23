@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
-import { Grid } from '../../components';
-import { ProductCard } from '../../containers/product-card';
-import { Product } from '../../types';
+import { Grid } from '@components';
+import { ProductCard } from '@containers';
+import { Product } from '@types';
 
 function AllProducts({ products }: { products: Product[] }) {
   return (
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      products
-    }
+      products,
+    },
   };
 };

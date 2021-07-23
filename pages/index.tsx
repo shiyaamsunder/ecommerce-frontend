@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import { Footer, NavBar } from '../components';
+import { Footer, NavBar } from '@components';
 import { Landing, ProductSection, SubscribeSection } from '../sections';
-import { HomeWrapper } from '../styles/home.styles';
-import { Category } from '../types';
+import { HomeWrapper } from '@styles/home.styles';
+import { Category } from '@types';
 
 export default function Home({ products }: { products: Category[] }) {
   return (
@@ -34,7 +34,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      products: data
-    }
+      products: data,
+    },
   };
 };

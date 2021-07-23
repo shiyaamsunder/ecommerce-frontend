@@ -1,4 +1,4 @@
-import { Button } from '../../components';
+import { Button } from '@components';
 import { SubscribeWrapper } from './styles';
 
 export const SubscribeSection = () => {

@@ -4,3 +4,4 @@ export * from './icons';
 export * from './ui';
 export { GoBackLink } from './link';
 export { Footer } from './footer';
+export { Layout } from './layout';
