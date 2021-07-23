@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   flex,
   flexbox,
@@ -9,7 +9,7 @@ import {
   LayoutProps,
   position,
   PositionProps,
-} from "styled-system";
+} from 'styled-system';
 
 export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
   ${flex}
@@ -18,7 +18,7 @@ export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
   width: 100%;
   height: auto;
 
-  border: 1px solid rgba(78, 78, 78, 0.4);
+  border: 1px solid ${({ theme }) => theme.colors.secondaryText};
 
   transition: box-shadow 120ms ease-in;
 
@@ -38,7 +38,7 @@ export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
   }
 
   &:hover {
-    box-shadow: 5px 5px 0px rgba(78, 78, 78, 0.4);
+    box-shadow: 5px 5px 0px ${({ theme }) => theme.colors.secondaryText};
   }
 `;
 

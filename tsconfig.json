@@ -18,8 +18,9 @@
     "paths": {
       "*": ["node_modules/*"],
       "@components": ["components/index"],
-      "@styles/*": ["styles/*"],
       "@containers": ["containers/index"],
+      "@hooks": ["hooks/index"],
+      "@styles/*": ["styles/*"],
       "@types": ["types/index"]
     }
   },

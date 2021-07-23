@@ -24,6 +24,11 @@ export const StyledButton = styled.button<ButtonProps>`
       variant === 'solid' ? '#3a3a3a' : '#F5F5F5'};
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
   @media only screen and (max-width: 1000px) {
     width: 140px;
   }

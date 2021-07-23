@@ -1,12 +1,12 @@
-import React from "react";
-import { StyledButton, StyledButtonGroup } from "./styles";
+import React from 'react';
+import { StyledButton, StyledButtonGroup } from './styles';
 
 export interface ButtonProps {
-  variant?: "solid" | "outline";
+  variant?: 'solid' | 'outline';
 }
 
 type ButtonElement = React.FunctionComponent<
-  ButtonProps & React.HTMLAttributes<HTMLButtonElement>
+  ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
 >;
 
 export const Button: ButtonElement = ({ children, ...rest }) => {

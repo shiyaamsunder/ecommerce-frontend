@@ -1,4 +1,4 @@
-import { Button } from '@components';
+import { Button, Input } from '@components';
 import { SubscribeWrapper } from './styles';
 
 export const SubscribeSection = () => {
@@ -22,7 +22,7 @@ export const SubscribeSection = () => {
         </p>
 
         <form className="subscribe__bottom">
-          <input type="email" className="subscribe__input" />
+          <Input placeholder="Email Address" />
           <Button
             onClick={(e) => {
               e.preventDefault();

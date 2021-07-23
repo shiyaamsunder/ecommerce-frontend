@@ -29,7 +29,6 @@ const StyledNav = styled.nav`
     width: 100px;
     display: flex;
     align-items: center;
-    cursor: pointer;
     justify-content: space-between;
   }
 
@@ -48,8 +47,16 @@ export const NavBar = () => {
       </Link>
 
       <div className="nav-right">
-        <UserIcon />
-        <CartIcon />
+        <Link href="/login" passHref>
+          <a>
+            <UserIcon />
+          </a>
+        </Link>
+        <Link href="/cart" passHref>
+          <a>
+            <CartIcon />
+          </a>
+        </Link>
       </div>
     </StyledNav>
   );

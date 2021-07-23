@@ -11,6 +11,7 @@ import {
   Bottom,
 } from '@styles/product.styles';
 import { Product } from '@types';
+import Link from 'next/link';
 
 function SingleProduct({ product }: { product: Product }) {
   return (
@@ -34,7 +35,11 @@ function SingleProduct({ product }: { product: Product }) {
         <Top>
           <GoBackLink />
 
-          <CartIcon />
+          <Link href="/cart" passHref>
+            <a>
+              <CartIcon />
+            </a>
+          </Link>
         </Top>
         <Details>
           <h1>{product.title}</h1>
