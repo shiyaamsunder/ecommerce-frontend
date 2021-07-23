@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { StyledButton, StyledButtonGroup } from './styles';
+import React from "react";
+import { StyledButton, StyledButtonGroup } from "./styles";
 
 export interface ButtonProps {
-  variant?: 'solid' | 'outline';
+  variant?: "solid" | "outline";
 }
 
 type ButtonElement = React.FunctionComponent<

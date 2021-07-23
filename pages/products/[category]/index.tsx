@@ -1,13 +1,13 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
-import { Button, Grid, GoBackLink, NavBar } from '../../../components';
-import { ProductCard } from '../../../containers/product-card';
+import { GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import { Grid, GoBackLink, NavBar } from "../../../components";
+import { ProductCard } from "../../../containers/product-card";
 import {
   CategoriesTop,
   CategoriesBottom,
-  CategoriesWrapper
-} from '../../../styles/categories.styles';
-import { Category, Product } from '../../../types';
+  CategoriesWrapper,
+} from "../../../styles/categories.styles";
+import { Category, Product } from "../../../types";
 
 function ProductsByCategories({ products }: { products: Product[] }) {
   const router = useRouter();
@@ -51,7 +51,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const categories: Category[] = await res.json();
   const paths = categories.map((category) => ({
-    params: { category: category.category }
+    params: { category: category.category },
   }));
 
   return { paths, fallback: false };
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      products
-    }
+      products,
+    },
   };
 };

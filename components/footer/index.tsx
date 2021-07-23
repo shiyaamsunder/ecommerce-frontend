@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import styled from 'styled-components';
-import { Flex, Grid } from '../ui';
+import Link from "next/link";
+import styled from "styled-components";
+import { Flex } from "../ui";
 
 const StyledFooter = styled.footer`
   padding: 30px 0 60px;
@@ -32,13 +32,13 @@ export const Footer = () => {
       <Flex
         alignItems="center"
         justifyContent="space-between"
-        flexDirection={['column', 'row']}
+        flexDirection={["column", "row"]}
       >
         <FooterLinksWrapper>
           <h3>Morioh</h3>
         </FooterLinksWrapper>
 
-        <Flex width="100%" flexDirection={['column', 'row']}>
+        <Flex width="100%" flexDirection={["column", "row"]}>
           <FooterLinksWrapper>
             <p>Links</p>
 

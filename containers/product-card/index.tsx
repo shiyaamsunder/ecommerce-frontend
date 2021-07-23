@@ -1,13 +1,12 @@
-import Image from 'next/image';
-import { Box, Card, Flex } from '../../components';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Image from "next/image";
+import { Box, Card, Flex } from "../../components";
+import Link from "next/link";
 
 export const ProductCard = ({
   image,
   id,
   title,
-  category
+  category,
 }: {
   image: string;
   title: string;

@@ -1,20 +1,15 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import {
   flex,
   flexbox,
   FlexboxProps,
   grid,
   GridProps,
-  height,
-  HeightProps,
   layout,
   LayoutProps,
   position,
   PositionProps,
-  TextStyleProps,
-  width,
-  WidthProps
-} from 'styled-system';
+} from "styled-system";
 
 export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
   ${flex}

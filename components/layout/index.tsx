@@ -1,5 +1,4 @@
-import React from 'react';
-import { NavBar } from '../navbar';
+import React from "react";
 
 export const Layout: React.FunctionComponent = ({ children }) => {
   return <>{children}</>;

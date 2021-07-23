@@ -1,14 +1,7 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import {
-  Box,
-  Button,
-  CartIcon,
-  Flex,
-  GoBackLink
-} from '../../../../components';
-import { Product } from '../../../../types';
+import { GetStaticPaths, GetStaticProps } from "next";
+import Image from "next/image";
+import { Box, Button, CartIcon, GoBackLink } from "../../../../components";
+import { Product } from "../../../../types";
 import {
   Middle,
   Details,
@@ -16,8 +9,8 @@ import {
   Right,
   Wrapper,
   Top,
-  Bottom
-} from '../../../../styles/product.styles';
+  Bottom,
+} from "../../../../styles/product.styles";
 
 function SingleProduct({ product }: { product: Product }) {
   return (
@@ -25,7 +18,7 @@ function SingleProduct({ product }: { product: Product }) {
       <Left>
         <Box
           width="400px"
-          height={['250px', '300px', '500px']}
+          height={["250px", "300px", "500px"]}
           position="relative"
         >
           <Image
@@ -72,7 +65,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const products: Product[] = await res.json();
   const paths = products.map((product) => ({
-    params: { productId: product._id, category: product.category }
+    params: { productId: product._id, category: product.category },
   }));
 
   return { paths, fallback: false };
@@ -85,13 +78,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!product) {
     return {
-      notFound: true
+      notFound: true,
     };
   }
 
   return {
     props: {
-      product
-    }
+      product,
+    },
   };
 };
