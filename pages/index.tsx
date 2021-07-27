@@ -1,8 +1,10 @@
 import Head from 'next/head';
+
 import { Footer, NavBar } from '@components';
-import { Landing, ProductSection, SubscribeSection } from '../sections';
-import { HomeWrapper } from '@styles/home.styles';
+import HomeWrapper from '@styles/home.styles';
 import { Category } from '@types';
+
+import { Landing, ProductSection, SubscribeSection } from '../sections';
 
 export default function Home({ products }: { products: Category[] }) {
   return (

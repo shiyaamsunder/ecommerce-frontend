@@ -1,6 +1,7 @@
-import { render, screen } from '@test-utils';
 import userEvent from '@testing-library/user-event';
+
 import { Button, ButtonGroup } from '@components';
+import { render, screen } from '@test-utils';
 
 describe('Button Component- UI', () => {
   it('Should render a button with text', () => {

@@ -1,9 +1,10 @@
+/* eslint-disable consistent-return */
 import { useCallback, useState } from 'react';
 
 interface RequestOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-  body?: BodyInit;
-  headers?: HeadersInit;
+  body?: any;
+  headers?: any;
 }
 
 /**
@@ -35,11 +36,12 @@ export const useFetch = () => {
         }
         setIsLoading(false);
         return data;
-      } catch (error) {
-        setError(error.message);
+      } catch (err) {
+        setError(err.message);
         setIsLoading(false);
       }
     },
+
     []
   );
   return { sendRequest, isLoading, error };

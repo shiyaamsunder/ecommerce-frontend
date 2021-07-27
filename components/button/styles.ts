@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { ButtonGroupProps, ButtonProps } from '.';
+
+import type { ButtonGroupProps, ButtonProps } from '.';
 
 export const StyledButton = styled.button<ButtonProps>`
   width: 175px;
@@ -18,6 +19,8 @@ export const StyledButton = styled.button<ButtonProps>`
     ${({ theme, variant }) =>
       variant === 'solid' ? 'transparent' : theme.colors.primaryText};
   cursor: pointer;
+
+  transition: transform 120ms ease;
 
   &:hover {
     background-color: ${({ variant }) =>

@@ -1,10 +1,12 @@
 import React from 'react';
+
 import {
   FlexboxProps,
   GridProps,
   LayoutProps,
-  PositionProps
+  PositionProps,
 } from 'styled-system';
+
 import { CardWrapper, GridWrapper, StyledBox, StyledFlex } from './styles';
 
 export const Card: React.FunctionComponent<LayoutProps & FlexboxProps> = ({

@@ -1,5 +1,7 @@
 import { Link } from 'react-scroll';
+
 import { Button, ButtonGroup } from '@components';
+
 import { LandingLeft, LandingRight, LandingWrapper } from './styles';
 
 export const Landing = () => {

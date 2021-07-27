@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+
 import { Grid } from '@components';
 import { ProductCard } from '@containers';
 import { Product } from '@types';

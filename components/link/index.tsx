@@ -1,6 +1,8 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { StyledLink } from "./styles";
+import React from 'react';
+
+import { useRouter } from 'next/router';
+
+import { StyledLink } from './styles';
 
 export const GoBackLink: React.FunctionComponent = ({ ...rest }) => {
   const router = useRouter();

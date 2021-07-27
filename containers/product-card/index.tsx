@@ -1,6 +1,7 @@
-import Image from "next/image";
-import { Box, Card, Flex } from "../../components";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { Box, Card, Flex } from '@components';
 
 export const ProductCard = ({
   image,
@@ -14,8 +15,8 @@ export const ProductCard = ({
   category: string;
 }) => {
   return (
-    <Link href={`/products/${category}/${id}`}>
-      <a>
+    <Link href={`/products/${category}/${id}`} passHref>
+      <a href="dummy">
         <Card>
           <Flex flexDirection="column" alignItems="center">
             <Box width="140px" height="250px" position="relative">

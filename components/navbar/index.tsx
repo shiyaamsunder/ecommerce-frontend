@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+
 import { UserIcon, CartIcon } from '../icons';
 
 const StyledNav = styled.nav`
@@ -26,7 +27,7 @@ const StyledNav = styled.nav`
   }
 
   & > .nav-right {
-    width: 100px;
+    width: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -40,21 +41,21 @@ const StyledNav = styled.nav`
 export const NavBar = () => {
   return (
     <StyledNav>
-      <Link href="/">
-        <a>
+      <Link href="/" passHref>
+        <a href="dummy">
           <h3 className="nav-logo">Morioh</h3>
         </a>
       </Link>
 
       <div className="nav-right">
-        <Link href="/login" passHref>
-          <a>
-            <UserIcon />
+        <Link href="/cart" passHref>
+          <a href="dummy">
+            <CartIcon />
           </a>
         </Link>
-        <Link href="/cart" passHref>
-          <a>
-            <CartIcon />
+        <Link href="/login" passHref>
+          <a href="dummy">
+            <UserIcon />
           </a>
         </Link>
       </div>

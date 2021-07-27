@@ -11,7 +11,7 @@ export const useInput = (validateValue: (value: string) => boolean) => {
     setEnteredValue(event.target.value);
   };
 
-  const inputBlurHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const inputBlurHandler = () => {
     setIsTouched(true);
   };
   const reset = () => {

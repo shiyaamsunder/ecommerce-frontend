@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-export const HomeWrapper = styled.section`
+const HomeWrapper = styled.section`
   width: 90%;
   margin: auto;
   max-width: 1200px;
 
   margin-top: 100px;
 `;
+
+export default HomeWrapper;

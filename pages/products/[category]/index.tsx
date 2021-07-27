@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+
 import { Grid, GoBackLink, NavBar } from '@components';
 import { ProductCard } from '@containers';
 import {

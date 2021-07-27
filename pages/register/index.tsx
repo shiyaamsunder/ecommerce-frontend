@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,8 +9,9 @@ import { Form, FormControl, Wrapper } from '@styles/login.styles';
 
 import { emailRegEx } from '../../utils';
 
-function SignInPage() {
+function SignUpPage() {
   const { sendRequest, error, isLoading } = useFetch();
+  const [success, setSuccess] = useState<string | null>();
   const router = useRouter();
 
   const {
@@ -23,6 +24,15 @@ function SignInPage() {
   } = useInput((value) => emailRegEx.test(value.trim()));
 
   const {
+    value: userName,
+    valueChangeHandler: userNameChangehandler,
+    hasError: userNameInputHasError,
+    isValid: userNameIsValid,
+    inputBlurHandler: userNameBlurHandler,
+    reset: resetUserName,
+  } = useInput((value) => value.trim() !== '');
+
+  const {
     value: password,
     valueChangeHandler: passwordChangehandler,
     hasError: passwordInputHasError,
@@ -31,13 +41,22 @@ function SignInPage() {
     reset: resetPassword,
   } = useInput((value) => value.trim().length >= 6);
 
+  const {
+    value: confirmPassword,
+    valueChangeHandler: confirmPasswordChangehandler,
+    hasError: confirmPasswordInputHasError,
+    isValid: confirmPasswordIsValid,
+    inputBlurHandler: confirmPasswordBlurHandler,
+    reset: resetconfirmPassword,
+  } = useInput((value) => value.trim() === password);
+
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     const data = await sendRequest(
-      'https://morioh-backend.herokuapp.com/api/users/login',
+      'https://morioh-backend.herokuapp.com/api/users/register',
       {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, name: userName, password }),
         headers: {
           'Content-type': 'application/json',
         },
@@ -46,25 +65,41 @@ function SignInPage() {
 
     resetEmail();
     resetPassword();
+    resetUserName();
+    resetconfirmPassword();
 
     if (data) {
-      setTimeout(() => router.replace('/'), 2000);
+      setSuccess('Account created. Please login.');
+      setTimeout(() => router.replace('/login'), 5000);
     }
   };
 
   let formIsValid = false;
 
-  if (emailIsValid && passwordIsValid) {
+  if (
+    emailIsValid &&
+    userNameIsValid &&
+    passwordIsValid &&
+    confirmPasswordIsValid
+  ) {
     formIsValid = true;
   }
 
   return (
     <Wrapper>
-      {isLoading && <h4>Logging in...</h4>}
+      {isLoading && <h4>Creating an account...</h4>}
 
       {error && <h4>{error}</h4>}
+
+      {success && (
+        <>
+          <h4>{success}</h4>
+          <p>Redirecting in 5s.</p>
+        </>
+      )}
+
       <Form onSubmit={onSubmitHandler}>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <FormControl>
           {emailInputHasError && (
             <div className="input__error">Email is badly formatted</div>
@@ -75,6 +110,18 @@ function SignInPage() {
             onChange={emailChangehandler}
             onBlur={emailBlurHandler}
             value={email}
+          />
+        </FormControl>
+        <FormControl>
+          {userNameInputHasError && (
+            <div className="input__error">Name must not be empty</div>
+          )}
+          <Input
+            placeholder="Name"
+            type="text"
+            onChange={userNameChangehandler}
+            onBlur={userNameBlurHandler}
+            value={userName}
           />
         </FormControl>
         <FormControl>
@@ -92,17 +139,30 @@ function SignInPage() {
             value={password}
           />
         </FormControl>
+        <FormControl>
+          {confirmPasswordInputHasError && (
+            <div className="input__error">Passwords dont match</div>
+          )}
+
+          <Input
+            placeholder="Confirm Password"
+            type="password"
+            onChange={confirmPasswordChangehandler}
+            onBlur={confirmPasswordBlurHandler}
+            value={confirmPassword}
+          />
+        </FormControl>
         <Button disabled={isLoading || !formIsValid}>Submit</Button>
       </Form>
 
       <p>
-        Not an user?
-        <Link href="/register" passHref>
-          <a href="register">Register Here</a>
+        Already an user?
+        <Link href="/login" passHref>
+          <a href="login">Login Here</a>
         </Link>
       </p>
     </Wrapper>
   );
 }
 
-export default SignInPage;
+export default SignUpPage;

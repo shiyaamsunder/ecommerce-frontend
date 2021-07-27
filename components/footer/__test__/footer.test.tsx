@@ -1,5 +1,5 @@
-import { render, screen } from '@test-utils';
 import { Footer } from '@components';
+import { render, screen } from '@test-utils';
 
 describe('Footer component', () => {
   it('Should render a footer component', () => {

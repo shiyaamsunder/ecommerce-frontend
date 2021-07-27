@@ -1,12 +1,13 @@
 import { Button, Input } from '@components';
-import { SubscribeWrapper } from './styles';
+
+import { SubscribeBody, SubscribeWrapper } from './styles';
 
 export const SubscribeSection = () => {
   return (
     <SubscribeWrapper>
       <h1 id="#subscribe">Subscribe</h1>
 
-      <div className="subscribe__body">
+      <SubscribeBody>
         <p>
           Minus ipsa voluptatum dolore fugit hic corrupti quae ducimus rem
           voluptatem! Alias illo consequatur perspiciatis modi inventore
@@ -26,14 +27,13 @@ export const SubscribeSection = () => {
           <Button
             onClick={(e) => {
               e.preventDefault();
-              alert('Hello');
             }}
             variant="solid"
           >
             Subscribe
           </Button>
         </form>
-      </div>
+      </SubscribeBody>
     </SubscribeWrapper>
   );
 };

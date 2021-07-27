@@ -1,65 +1,18 @@
-import Image from 'next/image';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Box, Button, CartIcon, GoBackLink } from '@components';
-import {
-  Middle,
-  Details,
-  Left,
-  Right,
-  Wrapper,
-  Top,
-  Bottom,
-} from '@styles/product.styles';
+
+import { ProductLeft, ProductRight, ProductWrapper } from '@containers';
 import { Product } from '@types';
-import Link from 'next/link';
 
 function SingleProduct({ product }: { product: Product }) {
   return (
-    <Wrapper>
-      <Left>
-        <Box
-          width="400px"
-          height={['250px', '300px', '500px']}
-          position="relative"
-        >
-          <Image
-            layout="fill"
-            objectFit="contain"
-            src={product.image}
-            alt={product.title}
-          />
-        </Box>
-      </Left>
-
-      <Right>
-        <Top>
-          <GoBackLink />
-
-          <Link href="/cart" passHref>
-            <a>
-              <CartIcon />
-            </a>
-          </Link>
-        </Top>
-        <Details>
-          <h1>{product.title}</h1>
-
-          <p>{product.description}</p>
-
-          <Middle>
-            <div>-00+</div>
-
-            <span className="price">&#x20B9;{product.price}</span>
-          </Middle>
-
-          <Bottom>
-            <Button variant="solid">Add to Cart</Button>
-
-            <Button>Save for Later</Button>
-          </Bottom>
-        </Details>
-      </Right>
-    </Wrapper>
+    <ProductWrapper>
+      <ProductLeft title={product.title} image={product.image} />
+      <ProductRight
+        title={product.title}
+        description={product.description}
+        price={product.price}
+      />
+    </ProductWrapper>
   );
 }
 

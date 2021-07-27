@@ -13,18 +13,18 @@ export const SubscribeWrapper = styled.section`
   & h1 {
     font-size: ${({ theme }) => theme.text.headingOne};
   }
+`;
 
-  & .subscribe__body {
-    width: 80%;
+export const SubscribeBody = styled.div`
+  width: 80%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   & .subscribe__bottom {
-    margin-top: 50px;
     display: flex;
+    margin-top: 1rem;
   }
 
   & .subscribe__input {
