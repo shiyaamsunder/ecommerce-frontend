@@ -20,8 +20,8 @@ function ProductsByCategories({ products }: { products: Product[] }) {
       <NavBar />
       <CategoriesWrapper>
         <Head>
-          <title>{capitalize(category)}</title>
-          <meta name="title" content="Books" />
+          <title>{capitalize(products[0].category)}</title>
+          <meta name="title" content={products[0].category} />
         </Head>
         <GoBackLink />
         <CategoriesTop>

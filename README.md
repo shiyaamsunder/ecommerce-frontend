@@ -8,6 +8,10 @@ Screenshots coming soon
 
 ---
 
+# TODO
+
+- [ ] Fix SEO issues.
+
 ## For local development
 
 First, clone this repo.

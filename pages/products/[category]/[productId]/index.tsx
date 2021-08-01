@@ -1,12 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import { ProductLeft, ProductRight, ProductWrapper } from '@containers';
 import { Product } from '@types';
 
 function SingleProduct({ product }: { product: Product }) {
-  const router = useRouter();
   return (
     <>
       <Head>
@@ -18,7 +16,7 @@ function SingleProduct({ product }: { product: Product }) {
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`https://ecommerce-frontend-sigma.vercel.app/${router.asPath}`}
+          content={`https://ecommerce-frontend-sigma.vercel.app/${product.category}/${product._id}`}
         />
         <meta property="og:title" content="Ecommerce Next JS" />
         <meta property="og:description" content={product.description} />
@@ -27,7 +25,7 @@ function SingleProduct({ product }: { product: Product }) {
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content={`https://ecommerce-frontend-sigma.vercel.app/${router.asPath}`}
+          content={`https://ecommerce-frontend-sigma.vercel.app/${product.category}/${product._id}`}
         />
         <meta property="twitter:title" content="Ecommerce Next JS" />
         <meta property="twitter:description" content={product.description} />
