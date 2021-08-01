@@ -5,14 +5,12 @@ import { Product } from '@types';
 
 function SingleProduct({ product }: { product: Product }) {
   return (
-    <ProductWrapper>
-      <ProductLeft title={product.title} image={product.image} />
-      <ProductRight
-        title={product.title}
-        description={product.description}
-        price={product.price}
-      />
-    </ProductWrapper>
+    <>
+      <ProductWrapper>
+        <ProductLeft title={product.title} image={product.image} />
+        <ProductRight product={product} />
+      </ProductWrapper>
+    </>
   );
 }
 

@@ -34,6 +34,24 @@ export const Top = styled.div`
   height: 100px;
   padding: 20px;
 
+  & a {
+    position: relative;
+  }
+  & .totalAmount {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    font-weight: 600;
+    background-color: #ffcfcf;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+
   @media only screen and (max-width: 768px) {
     padding: 20px 0;
   }

@@ -8,3 +8,12 @@ export interface Product {
   category: string;
   image: string;
 }
+
+export type ProductWithAmount = Product & { amount: number };
+
+export interface User {
+  tokens: {
+    accessToken: string;
+    refreshToken: string;
+  } | null;
+}

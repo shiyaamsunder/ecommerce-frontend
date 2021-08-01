@@ -9,11 +9,16 @@ import {
   LayoutProps,
   position,
   PositionProps,
+  space,
+  SpaceProps,
 } from 'styled-system';
 
-export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
+export const CardWrapper = styled.div<
+  LayoutProps & FlexboxProps & SpaceProps & { hoverPointer?: boolean }
+>`
   ${flex}
   ${layout}
+  ${space}
   padding: 20px 30px;
   width: 100%;
   height: auto;
@@ -22,7 +27,7 @@ export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
 
   transition: box-shadow 120ms ease-in;
 
-  cursor: pointer;
+  cursor: ${({ hoverPointer }) => hoverPointer && 'cursor'};
 
   & h1 {
     text-transform: capitalize;
@@ -43,11 +48,12 @@ export const CardWrapper = styled.div<LayoutProps & FlexboxProps>`
 `;
 
 export const StyledFlex = styled.div<
-  FlexboxProps & PositionProps & LayoutProps
+  FlexboxProps & PositionProps & LayoutProps & SpaceProps
 >`
   ${layout}
   ${flexbox}
   ${position}
+  ${space}
   display: flex;
 `;
 
@@ -57,8 +63,11 @@ export const GridWrapper = styled.div<GridProps & FlexboxProps>`
   display: grid;
 `;
 
-export const StyledBox = styled.div<LayoutProps & FlexboxProps & PositionProps>`
+export const StyledBox = styled.div<
+  LayoutProps & FlexboxProps & PositionProps & SpaceProps
+>`
   ${layout}
   ${flexbox}
   ${position}
+  ${space}
 `;

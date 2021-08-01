@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { toast, Toaster } from 'react-hot-toast';
 
 import { Button, Input } from '@components';
 import { useFetch, useInput } from '@hooks';
@@ -11,7 +12,6 @@ import { emailRegEx } from '../../utils';
 
 function SignUpPage() {
   const { sendRequest, error, isLoading } = useFetch();
-  const [success, setSuccess] = useState<string | null>();
   const router = useRouter();
 
   const {
@@ -50,8 +50,10 @@ function SignUpPage() {
     reset: resetconfirmPassword,
   } = useInput((value) => value.trim() === password);
 
+  const myToast = toast;
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+    myToast.loading('Creating an account...');
     const data = await sendRequest(
       'https://morioh-backend.herokuapp.com/api/users/register',
       {
@@ -67,10 +69,14 @@ function SignUpPage() {
     resetPassword();
     resetUserName();
     resetconfirmPassword();
-
+    myToast.dismiss();
     if (data) {
-      setSuccess('Account created. Please login.');
-      setTimeout(() => router.replace('/login'), 5000);
+      myToast.success('Account created. Please login. Redirecting in 2s', {
+        duration: 2000,
+      });
+      setTimeout(() => router.replace('/login'), 2000);
+    } else {
+      myToast.error(error);
     }
   };
 
@@ -87,17 +93,7 @@ function SignUpPage() {
 
   return (
     <Wrapper>
-      {isLoading && <h4>Creating an account...</h4>}
-
-      {error && <h4>{error}</h4>}
-
-      {success && (
-        <>
-          <h4>{success}</h4>
-          <p>Redirecting in 5s.</p>
-        </>
-      )}
-
+      <Toaster toastOptions={{ position: 'top-left' }} />
       <Form onSubmit={onSubmitHandler}>
         <h1>Register</h1>
         <FormControl>

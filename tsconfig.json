@@ -20,9 +20,11 @@
       "@components": ["components/index"],
       "@containers": ["containers/index"],
       "@hooks": ["hooks/index"],
+      "@redux/*": ["redux/*"],
       "@styles/*": ["styles/*"],
       "@types": ["types/index"],
-      "@test-utils": ["utils/test-utils"]
+      "@test-utils": ["utils/test-utils"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

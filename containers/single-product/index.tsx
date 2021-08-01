@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import toast, { Toaster } from 'react-hot-toast';
 
 import {
   AddIcon,
@@ -11,6 +12,8 @@ import {
   GoBackLink,
   MinusIcon,
 } from '@components';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { addToCart, getCart } from '@redux/slices';
 import {
   Middle,
   Details,
@@ -39,43 +42,74 @@ export const ProductLeft = ({
   );
 };
 
-export const ProductRight = ({
-  title,
-  description,
-  price,
-}: Omit<Product, 'image' | 'category' | '_id'>) => {
+export const ProductRight = ({ product }: { product: Product }) => {
+  const [amount, setAmount] = useState(1);
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector(getCart);
+
+  const increment = () => {
+    if (amount >= 10) return;
+    setAmount((prev) => prev + 1);
+  };
+  const decrement = () => {
+    if (amount < 0) return;
+    setAmount((prev) => prev - 1);
+  };
+
+  const addToCartHandler = () => {
+    const item = {
+      amount,
+      ...product,
+    };
+    dispatch(addToCart(item));
+    toast.success('Added to cart', {
+      position: 'top-left',
+    });
+    setAmount(1);
+  };
   return (
     <Right>
       <Top>
         <GoBackLink />
-
+        <Toaster />
         <Link href="/cart" passHref>
           <a href="cart">
             <CartIcon />
+            <span className="totalAmount">{cart.totalQuantity}</span>
           </a>
         </Link>
       </Top>
       <Details>
-        <h1>{title}</h1>
+        <h1>{product.title}</h1>
 
-        <p>{description}</p>
+        <p>{product.description}</p>
 
         <Middle>
           <div className="amount">
-            <button type="button" className="amount__button">
+            <button
+              onClick={decrement}
+              type="button"
+              className="amount__button"
+            >
               <MinusIcon />
             </button>
-            <div className="amount__input">00</div>
-            <button type="button" className="amount__button">
+            <div className="amount__input">{amount}</div>
+            <button
+              onClick={increment}
+              type="button"
+              className="amount__button"
+            >
               <AddIcon />
             </button>
           </div>
 
-          <span className="price">&#x20B9;{price}</span>
+          <span className="price">&#x20B9;{product.price}</span>
         </Middle>
 
         <Bottom>
-          <Button variant="solid">Add to Cart</Button>
+          <Button onClick={addToCartHandler} variant="solid">
+            Add to Cart
+          </Button>
 
           <Button>Save for Later</Button>
         </Bottom>

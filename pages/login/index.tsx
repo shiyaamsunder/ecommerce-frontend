@@ -2,20 +2,25 @@ import React from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { Button, Input } from '@components';
 import { useFetch, useInput } from '@hooks';
+import { useAppDispatch } from '@redux/hooks';
+import { setUser } from '@redux/slices';
 import { Form, FormControl, Wrapper } from '@styles/login.styles';
 
 import { emailRegEx } from '../../utils';
 
 function SignInPage() {
   const { sendRequest, error, isLoading } = useFetch();
+  // const [redirect, setRedirect] = useState(false);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const {
     value: email,
-    valueChangeHandler: emailChangehandler,
+    valueChangeHandler: emailChangeHandler,
     hasError: emailInputHasError,
     isValid: emailIsValid,
     inputBlurHandler: emailBlurHandler,
@@ -24,15 +29,17 @@ function SignInPage() {
 
   const {
     value: password,
-    valueChangeHandler: passwordChangehandler,
+    valueChangeHandler: passwordChangeHandler,
     hasError: passwordInputHasError,
     isValid: passwordIsValid,
     inputBlurHandler: passwordBlurHandler,
     reset: resetPassword,
   } = useInput((value) => value.trim().length >= 6);
 
+  const myToast = toast;
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+    myToast.loading('Logging in...', { position: 'top-left' });
     const data = await sendRequest(
       'https://morioh-backend.herokuapp.com/api/users/login',
       {
@@ -46,9 +53,17 @@ function SignInPage() {
 
     resetEmail();
     resetPassword();
+    myToast.dismiss();
 
     if (data) {
+      myToast.success('Success... redirecting in 2s', {
+        position: 'top-left',
+        duration: 2000,
+      });
+      dispatch(setUser({ tokens: data }));
       setTimeout(() => router.replace('/'), 2000);
+    } else {
+      myToast.error(error, { position: 'top-left' });
     }
   };
 
@@ -60,9 +75,7 @@ function SignInPage() {
 
   return (
     <Wrapper>
-      {isLoading && <h4>Logging in...</h4>}
-
-      {error && <h4>{error}</h4>}
+      <Toaster />
       <Form onSubmit={onSubmitHandler}>
         <h1>Login</h1>
         <FormControl>
@@ -72,7 +85,7 @@ function SignInPage() {
           <Input
             placeholder="Email"
             type="email"
-            onChange={emailChangehandler}
+            onChange={emailChangeHandler}
             onBlur={emailBlurHandler}
             value={email}
           />
@@ -87,7 +100,7 @@ function SignInPage() {
           <Input
             placeholder="Password"
             type="password"
-            onChange={passwordChangehandler}
+            onChange={passwordChangeHandler}
             onBlur={passwordBlurHandler}
             value={password}
           />

@@ -26,6 +26,7 @@ export const Landing = () => {
       </LandingLeft>
 
       <LandingRight>
+        {/* eslint-disable-next-line */}
         <img src="/landing.png" alt="landingpage" />
       </LandingRight>
     </LandingWrapper>

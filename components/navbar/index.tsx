@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import { useAppSelector, useAppDispatch } from '@redux/hooks';
+import { getUser, logout, replaceCart } from '@redux/slices';
+
+import { Button } from '../button';
 import { UserIcon, CartIcon } from '../icons';
 
 const StyledNav = styled.nav`
@@ -27,18 +31,40 @@ const StyledNav = styled.nav`
   }
 
   & > .nav-right {
-    width: 120px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & > button {
+      height: 100%;
+      width: 80px;
+    }
   }
 
   @media only screen and (max-width: 1000px) {
     padding: 10px 20px;
+    & > .nav-right {
+      width: 120px;
+    }
   }
 `;
 
 export const NavBar = () => {
+  const user = useAppSelector(getUser);
+  const dispatch = useAppDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    dispatch(
+      replaceCart({
+        totalPrice: 0,
+        totalQuantity: 0,
+        items: [],
+      })
+    );
+  };
+
   return (
     <StyledNav>
       <Link href="/" passHref>
@@ -53,11 +79,17 @@ export const NavBar = () => {
             <CartIcon />
           </a>
         </Link>
-        <Link href="/login" passHref>
-          <a href="dummy">
-            <UserIcon />
-          </a>
-        </Link>
+        {!user.tokens ? (
+          <Link href="/login" passHref>
+            <a href="dummy">
+              <UserIcon />
+            </a>
+          </Link>
+        ) : (
+          <Button onClick={logoutHandler} type="button">
+            Logout
+          </Button>
+        )}
       </div>
     </StyledNav>
   );
