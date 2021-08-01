@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Grid, GoBackLink, NavBar } from '@components';
@@ -9,6 +10,7 @@ import {
   CategoriesWrapper,
 } from '@styles/categories.styles';
 import { Category, Product } from '@types';
+import { capitalize } from '@utils/index';
 
 function ProductsByCategories({ products }: { products: Product[] }) {
   const router = useRouter();
@@ -17,6 +19,10 @@ function ProductsByCategories({ products }: { products: Product[] }) {
     <>
       <NavBar />
       <CategoriesWrapper>
+        <Head>
+          <title>{capitalize(category)}</title>
+          <meta name="title" content="Books" />
+        </Head>
         <GoBackLink />
         <CategoriesTop>
           <h1>{category}</h1>

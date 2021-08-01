@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { toast, Toaster } from 'react-hot-toast';
@@ -49,77 +50,91 @@ function CartPage() {
     myToast.success('Cart updated');
   };
   return (
-    <Wrapper>
-      <Toaster toastOptions={{ position: 'top-left' }} />
-      <Flex alignItems="center" justifyContent="space-between">
-        <h1>Cart</h1>
+    <>
+      <Head>
+        <title>My Cart</title>
+        <meta name="title" content="Cart page for Ecommerce Page." />
+        <meta name="description" content="Cart page for Ecommerce Page." />
+        <link rel="icon" href="/favicon.ico" />
 
-        <Link href="/" passHref>
-          <a href="home">Home</a>
-        </Link>
-      </Flex>
-      {!user.tokens && <h4>Please login to save your cart items</h4>}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://ecommerce-frontend-sigma.vercel.app/cart"
+        />
+      </Head>
+      <Wrapper>
+        <Toaster toastOptions={{ position: 'top-left' }} />
+        <Flex alignItems="center" justifyContent="space-between">
+          <h1>Cart</h1>
 
-      <Flex justifyContent="flex-end">
-        <h3>Grand Total: &#x20B9;{cart.totalPrice} </h3>
-      </Flex>
+          <Link href="/" passHref>
+            <a href="home">Home</a>
+          </Link>
+        </Flex>
+        {!user.tokens && <h4>Please login to save your cart items</h4>}
 
-      <Flex flexDirection="column">
-        {cart.items.map((item) => (
-          <Card key={item._id} mb="1rem" hoverPointer={false}>
-            <Flex
-              flexDirection={['column', null, 'row']}
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Box width="140px" height="250px" position="relative">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  layout="fill"
-                  objectFit="contain"
-                />
-              </Box>
+        <Flex justifyContent="flex-end">
+          <h3>Grand Total: &#x20B9;{cart.totalPrice} </h3>
+        </Flex>
 
+        <Flex flexDirection="column">
+          {cart.items.map((item) => (
+            <Card key={item._id} mb="1rem" hoverPointer={false}>
               <Flex
-                flexDirection="row"
-                justifyContent="space-between"
+                flexDirection={['column', null, 'row']}
                 alignItems="center"
-                width={['100%', null, '50%']}
-                marginTop={['1rem', null, '0']}
+                justifyContent="space-between"
               >
-                <Flex
-                  flexDirection="column"
-                  justifyContent="center"
-                  p={['0rem', '1rem']}
-                  maxWidth="300px"
-                >
-                  <h3>{item.title}</h3>
-                  <h4>Price: &#x20B9;{item.price}</h4>
-                  <h4>Quantity: {item.amount}</h4>
-                </Flex>
+                <Box width="140px" height="250px" position="relative">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </Box>
 
                 <Flex
-                  flexDirection="column"
-                  justifyContent="space-around"
-                  height="150px"
+                  flexDirection="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  width={['100%', null, '50%']}
+                  marginTop={['1rem', null, '0']}
                 >
-                  <Button onClick={() => removeFromCartHandler(item._id)}>
-                    Remove One
-                  </Button>
-                  <Button
-                    onClick={() => deleteAllHandler(item._id)}
-                    variant="outline"
+                  <Flex
+                    flexDirection="column"
+                    justifyContent="center"
+                    p={['0rem', '1rem']}
+                    maxWidth="300px"
                   >
-                    Delete All
-                  </Button>
+                    <h3>{item.title}</h3>
+                    <h4>Price: &#x20B9;{item.price}</h4>
+                    <h4>Quantity: {item.amount}</h4>
+                  </Flex>
+
+                  <Flex
+                    flexDirection="column"
+                    justifyContent="space-around"
+                    height="150px"
+                  >
+                    <Button onClick={() => removeFromCartHandler(item._id)}>
+                      Remove One
+                    </Button>
+                    <Button
+                      onClick={() => deleteAllHandler(item._id)}
+                      variant="outline"
+                    >
+                      Delete All
+                    </Button>
+                  </Flex>
                 </Flex>
               </Flex>
-            </Flex>
-          </Card>
-        ))}
-      </Flex>
-    </Wrapper>
+            </Card>
+          ))}
+        </Flex>
+      </Wrapper>
+    </>
   );
 }
 

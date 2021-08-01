@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
@@ -74,47 +75,88 @@ function SignInPage() {
   }
 
   return (
-    <Wrapper>
-      <Toaster />
-      <Form onSubmit={onSubmitHandler}>
-        <h1>Login</h1>
-        <FormControl>
-          {emailInputHasError && (
-            <div className="input__error">Email is badly formatted</div>
-          )}
-          <Input
-            placeholder="Email"
-            type="email"
-            onChange={emailChangeHandler}
-            onBlur={emailBlurHandler}
-            value={email}
-          />
-        </FormControl>
-        <FormControl>
-          {passwordInputHasError && (
-            <div className="input__error">
-              Password must be greater than 6 characters
-            </div>
-          )}
+    <>
+      <Head>
+        <title>Ecommerce - Login</title>
+        <meta name="title" content="Login page Ecommerce Next JS" />
+        <meta
+          name="description"
+          content="Ecommerce website built using Next JS by Shiyaam Sunder. Login Page"
+        />
+        <link rel="icon" href="/favicon.ico" />
 
-          <Input
-            placeholder="Password"
-            type="password"
-            onChange={passwordChangeHandler}
-            onBlur={passwordBlurHandler}
-            value={password}
-          />
-        </FormControl>
-        <Button disabled={isLoading || !formIsValid}>Submit</Button>
-      </Form>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://ecommerce-frontend-sigma.vercel.app/login"
+        />
+        <meta property="og:title" content="Ecommerce Next JS" />
+        <meta
+          property="og:description"
+          content="Ecommerce website built using Next JS by Shiyaam Sunder."
+        />
+        <meta
+          property="og:image"
+          content="https://ecommerce-frontend-sigma.vercel.app/login.jpg"
+        />
 
-      <p>
-        Not an user?
-        <Link href="/register" passHref>
-          <a href="register">Register Here</a>
-        </Link>
-      </p>
-    </Wrapper>
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://ecommerce-frontend-sigma.vercel.app/login"
+        />
+        <meta property="twitter:title" content="Ecommerce Next JS" />
+        <meta
+          property="twitter:description"
+          content="Ecommerce website built using Next JS by Shiyaam Sunder."
+        />
+        <meta
+          property="twitter:image"
+          content="https://ecommerce-frontend-sigma.vercel.app/login.jpg"
+        />
+      </Head>
+      <Wrapper>
+        <Toaster />
+        <Form onSubmit={onSubmitHandler}>
+          <h1>Login</h1>
+          <FormControl>
+            {emailInputHasError && (
+              <div className="input__error">Email is badly formatted</div>
+            )}
+            <Input
+              placeholder="Email"
+              type="email"
+              onChange={emailChangeHandler}
+              onBlur={emailBlurHandler}
+              value={email}
+            />
+          </FormControl>
+          <FormControl>
+            {passwordInputHasError && (
+              <div className="input__error">
+                Password must be greater than 6 characters
+              </div>
+            )}
+
+            <Input
+              placeholder="Password"
+              type="password"
+              onChange={passwordChangeHandler}
+              onBlur={passwordBlurHandler}
+              value={password}
+            />
+          </FormControl>
+          <Button disabled={isLoading || !formIsValid}>Submit</Button>
+        </Form>
+
+        <p>
+          Not an user?
+          <Link href="/register" passHref>
+            <a href="register">Register Here</a>
+          </Link>
+        </p>
+      </Wrapper>
+    </>
   );
 }
 

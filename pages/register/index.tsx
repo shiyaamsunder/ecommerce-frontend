@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast, Toaster } from 'react-hot-toast';
@@ -92,72 +93,113 @@ function SignUpPage() {
   }
 
   return (
-    <Wrapper>
-      <Toaster toastOptions={{ position: 'top-left' }} />
-      <Form onSubmit={onSubmitHandler}>
-        <h1>Register</h1>
-        <FormControl>
-          {emailInputHasError && (
-            <div className="input__error">Email is badly formatted</div>
-          )}
-          <Input
-            placeholder="Email"
-            type="email"
-            onChange={emailChangehandler}
-            onBlur={emailBlurHandler}
-            value={email}
-          />
-        </FormControl>
-        <FormControl>
-          {userNameInputHasError && (
-            <div className="input__error">Name must not be empty</div>
-          )}
-          <Input
-            placeholder="Name"
-            type="text"
-            onChange={userNameChangehandler}
-            onBlur={userNameBlurHandler}
-            value={userName}
-          />
-        </FormControl>
-        <FormControl>
-          {passwordInputHasError && (
-            <div className="input__error">
-              Password must be greater than 6 characters
-            </div>
-          )}
+    <>
+      <Head>
+        <title>Ecommerce - Register</title>
+        <meta name="title" content="Register page Ecommerce Next JS" />
+        <meta
+          name="description"
+          content="Ecommerce website built using Next JS by Shiyaam Sunder. Register Page"
+        />
+        <link rel="icon" href="/favicon.ico" />
 
-          <Input
-            placeholder="Password"
-            type="password"
-            onChange={passwordChangehandler}
-            onBlur={passwordBlurHandler}
-            value={password}
-          />
-        </FormControl>
-        <FormControl>
-          {confirmPasswordInputHasError && (
-            <div className="input__error">Passwords dont match</div>
-          )}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://ecommerce-frontend-sigma.vercel.app/register"
+        />
+        <meta property="og:title" content="Ecommerce Next JS" />
+        <meta
+          property="og:description"
+          content="Ecommerce website built using Next JS by Shiyaam Sunder."
+        />
+        <meta
+          property="og:image"
+          content="https://ecommerce-frontend-sigma.vercel.app/register.jpg"
+        />
 
-          <Input
-            placeholder="Confirm Password"
-            type="password"
-            onChange={confirmPasswordChangehandler}
-            onBlur={confirmPasswordBlurHandler}
-            value={confirmPassword}
-          />
-        </FormControl>
-        <Button disabled={isLoading || !formIsValid}>Submit</Button>
-      </Form>
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://ecommerce-frontend-sigma.vercel.app/register"
+        />
+        <meta property="twitter:title" content="Ecommerce Next JS" />
+        <meta
+          property="twitter:description"
+          content="Ecommerce website built using Next JS by Shiyaam Sunder."
+        />
+        <meta
+          property="twitter:image"
+          content="https://ecommerce-frontend-sigma.vercel.app/register.jpg"
+        />
+      </Head>
+      <Wrapper>
+        <Toaster toastOptions={{ position: 'top-left' }} />
+        <Form onSubmit={onSubmitHandler}>
+          <h1>Register</h1>
+          <FormControl>
+            {emailInputHasError && (
+              <div className="input__error">Email is badly formatted</div>
+            )}
+            <Input
+              placeholder="Email"
+              type="email"
+              onChange={emailChangehandler}
+              onBlur={emailBlurHandler}
+              value={email}
+            />
+          </FormControl>
+          <FormControl>
+            {userNameInputHasError && (
+              <div className="input__error">Name must not be empty</div>
+            )}
+            <Input
+              placeholder="Name"
+              type="text"
+              onChange={userNameChangehandler}
+              onBlur={userNameBlurHandler}
+              value={userName}
+            />
+          </FormControl>
+          <FormControl>
+            {passwordInputHasError && (
+              <div className="input__error">
+                Password must be greater than 6 characters
+              </div>
+            )}
 
-      <p>
-        Already an user?
-        <Link href="/login" passHref>
-          <a href="login">Login Here</a>
-        </Link>
-      </p>
-    </Wrapper>
+            <Input
+              placeholder="Password"
+              type="password"
+              onChange={passwordChangehandler}
+              onBlur={passwordBlurHandler}
+              value={password}
+            />
+          </FormControl>
+          <FormControl>
+            {confirmPasswordInputHasError && (
+              <div className="input__error">Passwords dont match</div>
+            )}
+
+            <Input
+              placeholder="Confirm Password"
+              type="password"
+              onChange={confirmPasswordChangehandler}
+              onBlur={confirmPasswordBlurHandler}
+              value={confirmPassword}
+            />
+          </FormControl>
+          <Button disabled={isLoading || !formIsValid}>Submit</Button>
+        </Form>
+
+        <p>
+          Already an user?
+          <Link href="/login" passHref>
+            <a href="login">Login Here</a>
+          </Link>
+        </p>
+      </Wrapper>
+    </>
   );
 }
 
