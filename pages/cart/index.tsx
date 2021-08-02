@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
 
+import {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,24 +12,22 @@ import { toast, Toaster } from 'react-hot-toast';
 
 import { Box, Button, Card, Flex } from '@components';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import {
-  deleteAllProduct,
-  getCart,
-  getUser,
-  removeFromCart,
-} from '@redux/slices';
+import { deleteAllProduct, getCart, removeFromCart } from '@redux/slices';
 import Wrapper from '@styles/cart.styles';
 import { fetchCartData, sendCartData } from '@utils/cart-action';
 
 let initial = true;
-function CartPage() {
+const CartPage: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = (props) => {
   const cart = useAppSelector(getCart);
-  const user = useAppSelector(getUser);
+  // const user = useAppSelector(getUser);
+  const { user } = props;
   const dispatch = useAppDispatch();
   const myToast = toast;
 
   useEffect(() => {
-    if (!user.tokens) return;
+    if (user.accessToken === '' || user.refreshToken === '') return;
     if (initial) {
       initial = false;
       return;
@@ -35,7 +38,7 @@ function CartPage() {
     }
   }, [cart, dispatch, user]);
   useEffect(() => {
-    if (!user.tokens) return;
+    if (user.accessToken === '' || user.refreshToken === '') return;
 
     dispatch(fetchCartData(user));
   }, [user, dispatch]);
@@ -72,7 +75,7 @@ function CartPage() {
             <a href="home">Home</a>
           </Link>
         </Flex>
-        {!user.tokens && <h4>Please login to save your cart items</h4>}
+        {!user && <h4>Please login to save your cart items</h4>}
 
         <Flex justifyContent="flex-end">
           <h3>Grand Total: &#x20B9;{cart.totalPrice} </h3>
@@ -136,6 +139,20 @@ function CartPage() {
       </Wrapper>
     </>
   );
-}
+};
 
 export default CartPage;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const accessToken = ctx.req.cookies.accessToken || '';
+  const refreshToken = ctx.req.cookies.refreshToken || '';
+
+  return {
+    props: {
+      user: {
+        accessToken,
+        refreshToken,
+      },
+    },
+  };
+};

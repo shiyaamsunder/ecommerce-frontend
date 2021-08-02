@@ -1,44 +1,67 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+// import {
+//   persistStore,
+//   persistReducer,
+//   FLUSH,
+//   REHYDRATE,
+//   PAUSE,
+//   PERSIST,
+//   PURGE,
+//   REGISTER,
+// } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
 import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+  nextReduxCookieMiddleware,
+  wrapMakeStore,
+} from 'next-redux-cookie-wrapper';
+import { createWrapper } from 'next-redux-wrapper';
 
 import cartReducer from './slices/cartSlice';
-import requestStateReducer from './slices/requestStateSlice';
 import userReducer from './slices/userSlice';
 
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage,
-};
+// const persistConfig = {
+//   key: 'root',
+//   version: 1,
+//   storage,
+//   whitelist: ['user'],
+// };
 
 const reducers = combineReducers({
   user: userReducer,
   cart: cartReducer,
-  requestState: requestStateReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+// const persistedReducer = persistReducer(persistConfig, reducers);
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-});
+// export const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({
+//       serializableCheck: {
+//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//       },
+//     }),
+// });
 
-export const persistor = persistStore(store);
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+const makeStore = wrapMakeStore(() =>
+  configureStore({
+    reducer: reducers,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().prepend(
+        nextReduxCookieMiddleware({
+          secure: process.env.NODE_ENV !== 'development',
+          subtrees: [`user`],
+          maxAge: 60 * 60,
+          sameSite: 'strict',
+          path: '/',
+        })
+      ),
+  })
+);
+
+// export const persistor = persistStore(store);
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
+
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });

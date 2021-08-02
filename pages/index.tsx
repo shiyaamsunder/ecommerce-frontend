@@ -1,3 +1,4 @@
+import { InferGetServerSidePropsType, NextPage } from 'next';
 import Head from 'next/head';
 
 import { Footer, NavBar } from '@components';
@@ -6,7 +7,10 @@ import { Category } from '@types';
 
 import { Landing, ProductSection, SubscribeSection } from '../sections';
 
-export default function Home({ products }: { products: Category[] }) {
+const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
+  props
+) => {
+  const { products } = props;
   return (
     <>
       <Head>
@@ -56,13 +60,14 @@ export default function Home({ products }: { products: Category[] }) {
       </HomeWrapper>
     </>
   );
-}
+};
 
+export default Home;
 export const getServerSideProps = async () => {
   const res = await fetch(
     'https://morioh-backend.herokuapp.com/api/products/categories'
   );
-  const data = await res.json();
+  const data: Category[] = await res.json();
 
   return {
     props: {

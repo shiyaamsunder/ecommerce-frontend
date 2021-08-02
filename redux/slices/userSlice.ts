@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
 
 import { User } from '@types';
 
 import type { RootState } from '../store';
 
 const initialState: User = {
-  tokens: null,
+  accessToken: null,
+  refreshToken: null,
 };
 
 export const userSlice = createSlice({
@@ -13,11 +15,19 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<typeof initialState>) => {
-      state.tokens = action.payload.tokens;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
     },
     logout: (state) => {
-      state.tokens = null;
+      state.accessToken = null;
+      state.refreshToken = null;
     },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, { payload }) => ({
+      ...state,
+      ...payload.page,
+    }),
   },
 });
 

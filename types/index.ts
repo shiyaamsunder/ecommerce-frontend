@@ -12,8 +12,6 @@ export interface Product {
 export type ProductWithAmount = Product & { amount: number };
 
 export interface User {
-  tokens: {
-    accessToken: string;
-    refreshToken: string;
-  } | null;
+  accessToken: string | null;
+  refreshToken: string | null;
 }

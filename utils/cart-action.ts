@@ -1,4 +1,4 @@
-import { replaceCart, setRequestState } from '@redux/slices';
+import { replaceCart } from '@redux/slices';
 import { User, ProductWithAmount } from '@types';
 
 export const fetchCartData = (user: User) => {
@@ -6,8 +6,8 @@ export const fetchCartData = (user: User) => {
     const fetchData = async () => {
       const res = await fetch('https://morioh-backend.herokuapp.com/api/cart', {
         headers: {
-          Authorization: `Bearer ${user.tokens?.accessToken}`,
-          'x-refresh-token': user.tokens?.refreshToken!,
+          Authorization: `Bearer ${user?.accessToken}`,
+          'x-refresh-token': user?.refreshToken!,
         },
       });
       if (!res.ok) {
@@ -37,15 +37,7 @@ export const fetchCartData = (user: User) => {
 };
 
 export const sendCartData = (cart: ProductWithAmount[], user: User) => {
-  return async (dispatch: any) => {
-    dispatch(
-      setRequestState({
-        error: false,
-        message: 'Sending cart data',
-        status: 'pending',
-      })
-    );
-
+  return async () => {
     const cartData = cart.map((item) => {
       return {
         amount: item.amount,
@@ -59,8 +51,8 @@ export const sendCartData = (cart: ProductWithAmount[], user: User) => {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${user.tokens?.accessToken}`,
-            'x-refresh-token': user.tokens?.refreshToken!,
+            Authorization: `Bearer ${user?.accessToken}`,
+            'x-refresh-token': user?.refreshToken!,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -75,21 +67,8 @@ export const sendCartData = (cart: ProductWithAmount[], user: User) => {
 
     try {
       await sendRequest();
-      dispatch(
-        setRequestState({
-          error: false,
-          message: 'Sent cart data',
-          status: 'success',
-        })
-      );
     } catch (error) {
-      dispatch(
-        setRequestState({
-          error: true,
-          message: error.message,
-          status: 'error',
-        })
-      );
+      console.log(error);
     }
   };
 };

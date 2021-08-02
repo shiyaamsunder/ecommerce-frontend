@@ -1,5 +1,6 @@
 import React from 'react';
 
+import cookie from 'js-cookie';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,6 +11,7 @@ import { useFetch, useInput } from '@hooks';
 import { useAppDispatch } from '@redux/hooks';
 import { setUser } from '@redux/slices';
 import { Form, FormControl, Wrapper } from '@styles/login.styles';
+import { User } from '@types';
 
 import { emailRegEx } from '../../utils';
 
@@ -41,7 +43,7 @@ function SignInPage() {
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     myToast.loading('Logging in...', { position: 'top-left' });
-    const data = await sendRequest(
+    const data: User = await sendRequest(
       'https://morioh-backend.herokuapp.com/api/users/login',
       {
         method: 'POST',
@@ -61,7 +63,19 @@ function SignInPage() {
         position: 'top-left',
         duration: 2000,
       });
-      dispatch(setUser({ tokens: data }));
+      cookie.set('accessToken', data.accessToken || '', {
+        expires: 15,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV !== 'development',
+      });
+      cookie.set('refreshToken', data.refreshToken || '', {
+        expires: 15,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV !== 'development',
+      });
+      dispatch(setUser({ ...data }));
       setTimeout(() => router.replace('/'), 2000);
     } else {
       myToast.error(error, { position: 'top-left' });
