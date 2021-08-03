@@ -111,7 +111,10 @@ export const ProductRight = ({ product }: { product: Product }) => {
             Add to Cart
           </Button>
 
-          <Button>Save for Later</Button>
+          {/* eslint-disable-next-line */}
+          <Button onClick={() => alert('Working on that!! 😀')}>
+            Save for Later
+          </Button>
         </Bottom>
       </Details>
     </Right>
