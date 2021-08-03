@@ -2,17 +2,27 @@
 
 **You can check out the backend code [here](https://github.com/shiyaamsunder/ecommerce-backend)**
 
+## ScreenShots
+
+_Screenshots coming soon_
+
 ---
 
-Screenshots coming soon
+## TODO
 
----
-
-# TODO
+### Features
 
 - [x] Fix SEO issues.
 - [ ] Redesign Cart page.
 - [ ] Implement Save to Later.
+
+### Testing
+
+- [ ] Finish all the tests.
+  - [ ] Mock **router.back()** function in _[components/link](./components/link/__test__/link.test.tsx)_.
+  - [ ] Wrap redux provider in custom provider. _[utils/test-utils](./utils/test-utils.tsx)_
+
+---
 
 ## For local development
 
