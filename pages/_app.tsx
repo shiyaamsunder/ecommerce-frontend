@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import { ThemeProvider } from 'styled-components';
 
-import { Layout } from '@components';
 import { wrapper } from '@redux/store';
 import GlobalStyles from '@styles/global';
 import theme from '@styles/theme';
@@ -40,9 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
       <GlobalStyles />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }

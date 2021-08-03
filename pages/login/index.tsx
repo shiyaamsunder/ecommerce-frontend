@@ -1,11 +1,10 @@
 import React from 'react';
 
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 
-import { Button, Input } from '@components';
+import { Button, GenericLink, Input } from '@components';
 import { useFetch, useInput } from '@hooks';
 import { useAppDispatch } from '@redux/hooks';
 import { setUser } from '@redux/slices';
@@ -152,9 +151,9 @@ function SignInPage() {
 
         <p>
           Not an user?
-          <Link href="/register" passHref>
-            <a href="register">Register Here</a>
-          </Link>
+          <GenericLink href="/register" passHref>
+            Register Here
+          </GenericLink>
         </p>
       </Wrapper>
     </>

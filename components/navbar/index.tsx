@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from 'styled-components';
 
 import { useAppSelector, useAppDispatch } from '@redux/hooks';
@@ -6,6 +5,7 @@ import { getUser, logout, replaceCart } from '@redux/slices';
 
 import { Button } from '../button';
 import { UserIcon, CartIcon } from '../icons';
+import { GenericLink } from '../link';
 
 const StyledNav = styled.nav`
   display: flex;
@@ -67,24 +67,18 @@ export const NavBar = () => {
 
   return (
     <StyledNav>
-      <Link href="/" passHref>
-        <a href="dummy">
-          <h3 className="nav-logo">Morioh</h3>
-        </a>
-      </Link>
+      <GenericLink href="/" passHref>
+        <h3 className="nav-logo">Morioh</h3>
+      </GenericLink>
 
       <div className="nav-right">
-        <Link href="/cart" passHref>
-          <a href="dummy">
-            <CartIcon />
-          </a>
-        </Link>
+        <GenericLink href="/cart" passHref>
+          <CartIcon />
+        </GenericLink>
         {!user.accessToken && !user.refreshToken ? (
-          <Link href="/login" passHref>
-            <a href="dummy">
-              <UserIcon />
-            </a>
-          </Link>
+          <GenericLink href="/login" passHref>
+            <UserIcon />
+          </GenericLink>
         ) : (
           <Button onClick={logoutHandler} type="button">
             Logout

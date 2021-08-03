@@ -7,10 +7,9 @@ import {
 } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 import { toast, Toaster } from 'react-hot-toast';
 
-import { Box, Button, Card, Flex } from '@components';
+import { Box, Button, Card, Flex, GenericLink } from '@components';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import {
   deleteAllProduct,
@@ -78,9 +77,7 @@ const CartPage: NextPage<
         <Flex alignItems="center" justifyContent="space-between">
           <h1>Cart</h1>
 
-          <Link href="/" passHref>
-            <a href="home">Home</a>
-          </Link>
+          <GenericLink href="/">Home</GenericLink>
         </Flex>
         {!user.accessToken && !user.refreshToken && (
           <h4>Please login to save your cart items</h4>

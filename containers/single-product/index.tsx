@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
 
 import {
@@ -9,6 +8,7 @@ import {
   Box,
   Button,
   CartIcon,
+  GenericLink,
   GoBackLink,
   MinusIcon,
 } from '@components';
@@ -72,12 +72,10 @@ export const ProductRight = ({ product }: { product: Product }) => {
       <Top>
         <GoBackLink />
         <Toaster />
-        <Link href="/cart" passHref>
-          <a href="cart">
-            <CartIcon />
-            <span className="totalAmount">{cart.totalQuantity}</span>
-          </a>
-        </Link>
+        <GenericLink href="/cart" passHref>
+          <CartIcon />
+          <span className="totalAmount">{cart.totalQuantity}</span>
+        </GenericLink>
       </Top>
       <Details>
         <h1>{product.title}</h1>

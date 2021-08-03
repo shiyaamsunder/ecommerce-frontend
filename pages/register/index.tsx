@@ -1,11 +1,10 @@
 import React from 'react';
 
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast, Toaster } from 'react-hot-toast';
 
-import { Button, Input } from '@components';
+import { Button, GenericLink, Input } from '@components';
 import { useFetch, useInput } from '@hooks';
 import { Form, FormControl, Wrapper } from '@styles/login.styles';
 
@@ -194,9 +193,9 @@ function SignUpPage() {
 
         <p>
           Already an user?
-          <Link href="/login" passHref>
-            <a href="login">Login Here</a>
-          </Link>
+          <GenericLink href="/login" passHref>
+            Login Here
+          </GenericLink>
         </p>
       </Wrapper>
     </>
