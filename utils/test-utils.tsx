@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import theme from '@styles/theme';
 
+// TODO wrap redux provider.
 const AllTheProviders: FC = ({ children }) => (
   <ThemeProvider theme={theme}>{children}</ThemeProvider>
 );

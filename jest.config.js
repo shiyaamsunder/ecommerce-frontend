@@ -21,6 +21,7 @@ module.exports = {
     '@pages/(.*)': '<rootDir>/pages/$1',
     '@styles/(.*)': '<rootDir>/styles/$1',
     '@test-utils': '<rootDir>/utils/test-utils',
+    '@redux/(.*)': '<rootDir>/redux/$1',
   },
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
@@ -29,6 +30,7 @@ module.exports = {
     'containers/**/*.{js,jsx,ts,tsx}',
     'pages/**/*.{js,jsx,ts,tsx}',
   ],
+  coveragePathIgnorePatterns: ['<rootDir>/components/icons'],
   coverageThreshold: {
     global: {
       branches: 90,
