@@ -1,6 +1,5 @@
 import React from 'react';
 
-import cookie from 'js-cookie';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -62,18 +61,6 @@ function SignInPage() {
       myToast.success('Success... redirecting in 2s', {
         position: 'top-left',
         duration: 2000,
-      });
-      cookie.set('accessToken', data.accessToken || '', {
-        expires: 15,
-        sameSite: 'strict',
-        path: '/',
-        secure: process.env.NODE_ENV !== 'development',
-      });
-      cookie.set('refreshToken', data.refreshToken || '', {
-        expires: 15,
-        sameSite: 'strict',
-        path: '/',
-        secure: process.env.NODE_ENV !== 'development',
       });
       dispatch(setUser({ ...data }));
       setTimeout(() => router.replace('/'), 2000);

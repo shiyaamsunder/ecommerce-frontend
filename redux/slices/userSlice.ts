@@ -17,6 +17,7 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<typeof initialState>) => {
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
+      Object.assign(state, action);
     },
     logout: (state) => {
       state.accessToken = null;
@@ -24,10 +25,12 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: {
-    [HYDRATE]: (state, { payload }) => ({
-      ...state,
-      ...payload.page,
-    }),
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.user,
+      };
+    },
   },
 });
 

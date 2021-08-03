@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import {
-  GetServerSidePropsContext,
+  // GetServerSidePropsContext,
   InferGetServerSidePropsType,
   NextPage,
 } from 'next';
@@ -12,22 +12,29 @@ import { toast, Toaster } from 'react-hot-toast';
 
 import { Box, Button, Card, Flex } from '@components';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { deleteAllProduct, getCart, removeFromCart } from '@redux/slices';
+import {
+  deleteAllProduct,
+  getCart,
+  removeFromCart,
+  replaceCart,
+  getUser,
+} from '@redux/slices';
+import { wrapper } from '@redux/store';
 import Wrapper from '@styles/cart.styles';
+import { ProductWithAmount, User } from '@types';
 import { fetchCartData, sendCartData } from '@utils/cart-action';
 
 let initial = true;
 const CartPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = (props) => {
+> = () => {
   const cart = useAppSelector(getCart);
-  // const user = useAppSelector(getUser);
-  const { user } = props;
+  const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
   const myToast = toast;
 
   useEffect(() => {
-    if (user.accessToken === '' || user.refreshToken === '') return;
+    if (!user.accessToken || !user.refreshToken) return;
     if (initial) {
       initial = false;
       return;
@@ -38,7 +45,7 @@ const CartPage: NextPage<
     }
   }, [cart, dispatch, user]);
   useEffect(() => {
-    if (user.accessToken === '' || user.refreshToken === '') return;
+    if (!user.accessToken || !user.refreshToken) return;
 
     dispatch(fetchCartData(user));
   }, [user, dispatch]);
@@ -75,7 +82,9 @@ const CartPage: NextPage<
             <a href="home">Home</a>
           </Link>
         </Flex>
-        {!user && <h4>Please login to save your cart items</h4>}
+        {!user.accessToken && !user.refreshToken && (
+          <h4>Please login to save your cart items</h4>
+        )}
 
         <Flex justifyContent="flex-end">
           <h3>Grand Total: &#x20B9;{cart.totalPrice} </h3>
@@ -143,16 +152,46 @@ const CartPage: NextPage<
 
 export default CartPage;
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const accessToken = ctx.req.cookies.accessToken || '';
-  const refreshToken = ctx.req.cookies.refreshToken || '';
-
-  return {
-    props: {
-      user: {
-        accessToken,
-        refreshToken,
-      },
+const fetchData = async (user: User) => {
+  const res = await fetch('https://morioh-backend.herokuapp.com/api/cart', {
+    headers: {
+      Authorization: `Bearer ${user?.accessToken}`,
+      'x-refresh-token': user?.refreshToken!,
     },
-  };
+  });
+  if (!res.ok) {
+    throw new Error();
+  }
+  return res.json();
 };
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    const { user } = store.getState();
+    let newData;
+    if (user.accessToken && user.refreshToken) {
+      const data: ProductWithAmount[] = await fetchData(user);
+      const totalQuantity = data.reduce((acc, item) => acc + item.amount, 0);
+      const totalPrice = data.reduce(
+        (acc, item) => acc + item.price * item.amount,
+        0
+      );
+      newData = {
+        totalQuantity,
+        totalPrice,
+        items: [...data],
+      };
+      await store.dispatch(replaceCart(newData));
+    }
+
+    return {
+      props: {
+        cart: newData || {
+          totalQuantity: 0,
+          totalPrice: 0,
+          items: [],
+          changed: false,
+        },
+      },
+    };
+  }
+);

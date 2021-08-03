@@ -31,7 +31,7 @@ export const fetchCartData = (user: User) => {
       dispatch(replaceCart(newData));
     } catch (error) {
       // eslint-disable-next-line
-      console.log(error);
+      console.log(error.message);
     }
   };
 };
@@ -68,6 +68,7 @@ export const sendCartData = (cart: ProductWithAmount[], user: User) => {
     try {
       await sendRequest();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };

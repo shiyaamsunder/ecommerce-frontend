@@ -85,7 +85,7 @@ export const cartSlice = createSlice({
 });
 
 // Selectors
-export const getCart = (state: RootState) => state.cart;
+export const getCart = (state: RootState) => state[cartSlice.name];
 
 // Reducers and actions
 export const { addToCart, removeFromCart, deleteAllProduct, replaceCart } =

@@ -1,4 +1,3 @@
-import cookie from 'js-cookie';
 import Link from 'next/link';
 import styled from 'styled-components';
 
@@ -56,8 +55,6 @@ export const NavBar = () => {
   const dispatch = useAppDispatch();
 
   const logoutHandler = () => {
-    cookie.remove('accessToken');
-    cookie.remove('refreshToken');
     dispatch(logout());
     dispatch(
       replaceCart({

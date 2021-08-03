@@ -10,7 +10,9 @@ Screenshots coming soon
 
 # TODO
 
-- [ ] Fix SEO issues.
+- [x] Fix SEO issues.
+- [ ] Redesign Cart page.
+- [ ] Implement Save to Later.
 
 ## For local development
 
