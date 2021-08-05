@@ -17,7 +17,8 @@ module.exports = {
   moduleNameMapper: {
     '@hooks/(.*)': '<rootDir>/hooks/$1',
     '@components(.*)': '<rootDir>/components/$1',
-    '@containers/(.*)': '<rootDir>/containers/$1',
+    '@containers(.*)': '<rootDir>/containers/$1',
+    '@fixtures(.*)': '<rootDir>/fixtures/$1',
     '@pages/(.*)': '<rootDir>/pages/$1',
     '@styles/(.*)': '<rootDir>/styles/$1',
     '@test-utils': '<rootDir>/utils/test-utils',

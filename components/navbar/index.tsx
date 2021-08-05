@@ -80,7 +80,11 @@ export const NavBar = () => {
             <UserIcon />
           </GenericLink>
         ) : (
-          <Button onClick={logoutHandler} type="button">
+          <Button
+            data-testid="logoutButton"
+            onClick={logoutHandler}
+            type="button"
+          >
             Logout
           </Button>
         )}

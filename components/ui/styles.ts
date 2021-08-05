@@ -27,7 +27,7 @@ export const CardWrapper = styled.div<
 
   transition: box-shadow 120ms ease-in;
 
-  cursor: ${({ hoverPointer }) => hoverPointer && 'cursor'};
+  cursor: ${({ hoverPointer }) => hoverPointer && 'pointer'};
 
   & h1 {
     text-transform: capitalize;
