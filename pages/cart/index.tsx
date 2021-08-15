@@ -1,10 +1,6 @@
 import { useEffect } from 'react';
 
-import {
-  // GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-  NextPage,
-} from 'next';
+import { InferGetServerSidePropsType, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { toast, Toaster } from 'react-hot-toast';

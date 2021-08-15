@@ -1,15 +1,4 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-// import {
-//   persistStore,
-//   persistReducer,
-//   FLUSH,
-//   REHYDRATE,
-//   PAUSE,
-//   PERSIST,
-//   PURGE,
-//   REGISTER,
-// } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
 import {
   nextReduxCookieMiddleware,
   wrapMakeStore,
@@ -19,29 +8,10 @@ import { createWrapper } from 'next-redux-wrapper';
 import cartReducer from './slices/cartSlice';
 import userReducer from './slices/userSlice';
 
-// const persistConfig = {
-//   key: 'root',
-//   version: 1,
-//   storage,
-//   whitelist: ['user'],
-// };
-
 const reducers = combineReducers({
   user: userReducer,
   cart: cartReducer,
 });
-
-// const persistedReducer = persistReducer(persistConfig, reducers);
-
-// export const store = configureStore({
-//   reducer: persistedReducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }),
-// });
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
@@ -59,7 +29,6 @@ const makeStore = wrapMakeStore(() =>
   })
 );
 
-// export const persistor = persistStore(store);
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
