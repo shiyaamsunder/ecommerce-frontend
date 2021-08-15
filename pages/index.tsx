@@ -7,10 +7,11 @@ import { Category } from '@types';
 
 import { Landing, ProductSection, SubscribeSection } from '../sections';
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
-  props
-) => {
-  const { products } = props;
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  products,
+}: {
+  products: Category[];
+}) => {
   return (
     <>
       <Head>
